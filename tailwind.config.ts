@@ -19,7 +19,7 @@ const config: Config = {
       },
       boxShadow: {
         s: "rgba(117, 101, 76, 0.12) 0px 1px 3px, rgba(117, 101, 76, 0.24) 0px 1px 2px",
-        m: "rgba(32, 50, 93, 0.15) 0px 6px 12px -2px, rgba(32, 50, 93, 0.2) 0px 3px 7px -3px;",
+        m: "rgba(32, 50, 93, 0.15) 0px 6px 12px -2px, rgba(32, 50, 93, 0.2) 0px 3px 7px -3px",
         l: "rgba(117, 101, 76, 0.25) 0px 13px 27px -5px, rgba(117, 101, 76, 0.3) 0px 8px 16px -8px",
       },
       screens: {
