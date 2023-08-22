@@ -29,7 +29,7 @@ const page = async () => {
         <h2 className="bg-dark w-fit px-5 py-2 shadow-s">Meal Planning</h2>
 
         <MainCalendar allRecipes={JSON.stringify(allRecipes)} />
-        <TodayMeals />
+        <TodayMeals allRecipes={JSON.stringify(allRecipes)} />
       </div>
     </BasicAnimLayout>
   );
