@@ -10,7 +10,7 @@ const TodayMeals = async () => {
   // Variables
   const todayDate = new Date();
   const session = await getServerSession(authOptions);
-  const res = await fetch("http://localhost:3000/api/get-meal-planning-data", {
+  const res = await fetch(`${process.env.APP_URL}/api/get-meal-planning-data`, {
     next: { tags: ["mealPlanningData"] },
     method: "POST",
     headers: {
