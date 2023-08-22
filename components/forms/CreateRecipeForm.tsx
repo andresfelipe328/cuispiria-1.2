@@ -211,7 +211,7 @@ const CreateRecipeForm = ({
               <div className="flex items-center gap-2">
                 <input
                   type="text"
-                  id="recipe-ingredient"
+                  id={`recipe-ingredient-${field.id}`}
                   {...register(`recipeIngredient.${index}.ingredient`, {
                     required: "at least one ingredient is required",
                     pattern: {
@@ -257,7 +257,7 @@ const CreateRecipeForm = ({
             <div className="flex items-center gap-1">
               <input
                 type="text"
-                id="recipe-ingredient"
+                id={`recipe-instruction-${field.id}`}
                 {...register(`recipeInstruction.${index}.instruction`, {
                   required: "at least one instruction is required",
                 })}
