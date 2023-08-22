@@ -23,7 +23,7 @@ export type RecipeOverview = {
   recipeId: string | number;
   title: string;
   readyInMinutes: number;
-  mealType: string[];
+  recipeType: string[];
   image?: string;
   date?: string;
   timeSlot?: number;

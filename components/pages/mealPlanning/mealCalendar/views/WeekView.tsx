@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 
 import { nanoid } from "nanoid";
-import { Tooltip } from "react-tooltip";
 import { CustomRecipe } from "@/utils/types";
 import { handleWeekView } from "@/utils/calendarHelper";
 
@@ -91,6 +90,8 @@ const WeekView = ({
         "Content-type": "application/json",
       },
       body: JSON.stringify({
+        action: "paste",
+        prevRecipeId: recipeId,
         recipeId: newRecipeId,
         date: new Date(day.toDateString()),
         timeSlot: newTimeSlot,
@@ -99,7 +100,7 @@ const WeekView = ({
     });
 
     const { message, code } = await res.json();
-    console.log(message);
+
     setMeals([
       ...meals,
       {
@@ -118,7 +119,7 @@ const WeekView = ({
     if (meal)
       return (
         <div className="absolute text-center top-0 left-0 w-full h-full flex flex-col gap-2 items-center justify-center">
-          <small className="uppercase font-bold text-dark opacity-0 md:opacity-100 translate-y-3 group-hover:translate-y-0 transition-ease">
+          <small className="uppercase font-bold text-dark p-1 opacity-0 md:opacity-100 translate-y-3 group-hover:translate-y-0 transition-ease">
             {meal.title}
           </small>
           <span className="point md:opacity-0 group-hover:-translate-y-4 transition-ease"></span>
@@ -131,11 +132,6 @@ const WeekView = ({
             >
               <FaTrash className="text-red-500" />
             </button>
-            <Tooltip
-              id="delete-recipe-button"
-              place="top-end"
-              content="delete"
-            />
 
             <button
               data-tooltip-id="copy-recipe-button"
@@ -145,7 +141,6 @@ const WeekView = ({
             >
               <FaCopy className="text-dark" />
             </button>
-            <Tooltip id="copy-recipe-button" place="top-end" content="copy" />
           </div>
         </div>
       );
@@ -160,7 +155,6 @@ const WeekView = ({
           >
             <FaPaste className="text-dark" />
           </button>
-          <Tooltip id="paste-recipe-button" place="top-end" content="paste" />
         </div>
       );
     else return null;

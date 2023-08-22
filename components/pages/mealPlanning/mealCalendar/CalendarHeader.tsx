@@ -120,10 +120,10 @@ const CalendarHeader = ({
             type="date"
             value={selectedDate.toISOString().slice(0, 10)}
             onChange={handleDateChange}
-            className="font-title group-hover:bg-extra transition-ease"
+            className="font-title group-hover:bg-extra group-hover:text-medium transition-ease"
           />
           <span className="absolute top-[.55rem] right-2 bg-main group-hover:bg-extra transition-all duration-300 ease-in-out pointer-events-none">
-            <AiFillCalendar className="text-xl text-dark" />
+            <AiFillCalendar className="text-xl text-dark group-hover:text-medium transition-ease" />
           </span>
         </div>
 

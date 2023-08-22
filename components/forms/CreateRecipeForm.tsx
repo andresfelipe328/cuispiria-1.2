@@ -91,6 +91,8 @@ const CreateRecipeForm = ({
         "Content-type": "application/json",
       },
       body: JSON.stringify({
+        action: "create",
+        prevRecipeId: meals[recipeIndex]?.recipeId,
         userId: session.data.user.id,
         recipeId: newRecipeId,
         date: new Date(selectedSlot!.day),

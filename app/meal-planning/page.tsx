@@ -3,11 +3,12 @@ import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import type { Metadata } from "next";
 
-import { authOptions } from "../api/auth/[...nextauth]/route";
 import { getAllRecipes } from "@/utils/mongoHelper";
+import { authOptions } from "../api/auth/[...nextauth]/route";
 
 import BasicAnimLayout from "@/components/layouts/BasicAnimLayout";
 import MainCalendar from "@/components/pages/mealPlanning/mealCalendar/MainCalendar";
+import TodayMeals from "@/components/pages/mealPlanning/todayMeals/TodayMeals";
 
 export const metadata: Metadata = {
   title: "Cuispiria - Meal Planning",
@@ -28,6 +29,7 @@ const page = async () => {
         <h2 className="bg-dark w-fit px-5 py-2 shadow-s">Meal Planning</h2>
 
         <MainCalendar allRecipes={JSON.stringify(allRecipes)} />
+        <TodayMeals />
       </div>
     </BasicAnimLayout>
   );

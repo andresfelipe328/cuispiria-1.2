@@ -4,6 +4,8 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 
+import { getAllSavedRecipes } from "@/utils/mongoHelper";
+
 import BasicAnimLayout from "@/components/layouts/BasicAnimLayout";
 import CustomRecipes from "@/components/pages/yourRecipes/CustomRecipes";
 import Recipes from "@/components/pages/yourRecipes/Recipes";
@@ -18,13 +20,15 @@ const page = async () => {
   const session = await getServerSession(authOptions);
   if (!session) redirect("/search-recipe");
 
+  const allRecipes = await getAllSavedRecipes(session);
+
   return (
     <BasicAnimLayout>
       <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col gap-5 p-4">
         <h2 className="bg-dark w-fit px-5 py-2 shadow-s">Your Recipes</h2>
 
-        <CustomRecipes />
-        <Recipes />
+        <CustomRecipes allRecipes={JSON.stringify(allRecipes)} />
+        {/* <Recipes /> */}
       </div>
     </BasicAnimLayout>
   );
