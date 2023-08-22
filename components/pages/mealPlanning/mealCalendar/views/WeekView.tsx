@@ -56,16 +56,19 @@ const WeekView = ({
     e.stopPropagation();
     setMeals(meals.filter((meal) => meal.recipeId !== selectedMeal.recipeId));
 
-    const res = await fetch("http://localhost:3000/api/delete-custom-recipe", {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: session.data.user.id,
-        recipeId: selectedMeal.recipeId,
-      }),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/delete-custom-recipe`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: session.data.user.id,
+          recipeId: selectedMeal.recipeId,
+        }),
+      }
+    );
 
     const { message, code } = await res.json();
   };
@@ -84,20 +87,23 @@ const WeekView = ({
     const newRecipeId = nanoid();
     const { _id, recipeId, date, timeSlot, ...rest } = copyMeal!;
 
-    const res = await fetch(`http://localhost:3000/api/create-custom-recipe`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        action: "paste",
-        prevRecipeId: recipeId,
-        recipeId: newRecipeId,
-        date: new Date(day.toDateString()),
-        timeSlot: newTimeSlot,
-        ...rest,
-      }),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/create-custom-recipe`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "paste",
+          prevRecipeId: recipeId,
+          recipeId: newRecipeId,
+          date: new Date(day.toDateString()),
+          timeSlot: newTimeSlot,
+          ...rest,
+        }),
+      }
+    );
 
     const { message, code } = await res.json();
 

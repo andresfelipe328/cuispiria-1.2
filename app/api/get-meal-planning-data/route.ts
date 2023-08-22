@@ -1,6 +1,5 @@
 import { CustomRecipe } from "@/models/models";
 import { RecipeOverview } from "@/utils/types";
-import { revalidatePath } from "next/cache";
 import { NextResponse, NextRequest } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -12,8 +11,6 @@ export async function POST(request: NextRequest) {
       recipes = await CustomRecipe.find({
         userId: session.user.id,
       });
-
-    revalidatePath(request.nextUrl.searchParams.get("path") || "/");
 
     return NextResponse.json({
       code: 200,

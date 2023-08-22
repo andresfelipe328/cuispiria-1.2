@@ -83,26 +83,28 @@ const CreateRecipeForm = ({
   const handleAddRecipe = async (data: FormValues) => {
     // Variables
     const newRecipeId = nanoid();
-    const appURL = process.env.APP_URL;
     const { readyInMinutes, recipeTypes, ...rest } = data;
-    const res = await fetch(`http://localhost:3000/api/create-custom-recipe`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        action: "create",
-        prevRecipeId: meals[recipeIndex]?.recipeId,
-        userId: session.data.user.id,
-        recipeId: newRecipeId,
-        date: new Date(selectedSlot!.day),
-        timeSlot: selectedSlot!.timeSlot,
-        customed: true,
-        readyInMinutes: Number(readyInMinutes),
-        recipeTypes: recipeTypes.split(","),
-        ...rest,
-      }),
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/create-custom-recipe`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          action: "create",
+          prevRecipeId: meals[recipeIndex]?.recipeId,
+          userId: session.data.user.id,
+          recipeId: newRecipeId,
+          date: new Date(selectedSlot!.day),
+          timeSlot: selectedSlot!.timeSlot,
+          customed: true,
+          readyInMinutes: Number(readyInMinutes),
+          recipeTypes: recipeTypes.split(","),
+          ...rest,
+        }),
+      }
+    );
 
     const { message, code } = await res.json();
 
