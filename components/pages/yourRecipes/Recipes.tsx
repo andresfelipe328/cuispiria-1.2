@@ -10,14 +10,14 @@ const Recipes = () => {
         id="recipes-list-container"
         className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3"
       >
+        {/* <RecipeOverview saved={true} />
         <RecipeOverview saved={true} />
         <RecipeOverview saved={true} />
         <RecipeOverview saved={true} />
         <RecipeOverview saved={true} />
         <RecipeOverview saved={true} />
         <RecipeOverview saved={true} />
-        <RecipeOverview saved={true} />
-        <RecipeOverview saved={true} />
+        <RecipeOverview saved={true} /> */}
       </div>
     </div>
   );
