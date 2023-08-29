@@ -17,7 +17,7 @@ const page = async () => {
 
   return (
     <BasicAnimLayout>
-      <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col gap-2 p-4">
+      <div className="max-w-7xl mx-auto w-full flex flex-col gap-4 p-4">
         <h2 className="bg-dark w-fit px-5 py-2 shadow-s">Search Recipe</h2>
 
         {!session && <NotSignedInPageRestriction />}

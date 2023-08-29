@@ -1,25 +1,96 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
+import { useForm } from "react-hook-form";
 
 import { GrPowerReset } from "react-icons/gr";
 
-import { Filter } from "@/utils/types";
+import { Filter, RecipeOverview } from "@/utils/types";
 import RecipeSearchFilters from "../pages/recipeSearch/RecipeSearchFilters";
 
-const RecipeSearchForm = () => {
+type FormValues = {
+  searchRecipeInput: string;
+};
+
+type Props = {
+  setRecipesList: Function;
+  recipesList: RecipeOverview[];
+  setLoading: Function;
+};
+
+const RecipeSearchForm = ({
+  recipesList,
+  setRecipesList,
+  setLoading,
+}: Props) => {
   // Variables
   const [show, setShow] = useState(false);
   const [filters, setFilters] = useState<Filter[]>([]);
-  const [searchInput, setSearchInput] = useState("");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const form = useForm<FormValues>();
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = form;
 
-  const handleRecipeSearch = (e: React.FormEvent) => {
-    e.preventDefault();
+  useEffect(() => {
+    const fetchRecipes = async () => {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_URL}/api/get-recipes`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+          },
+          body: JSON.stringify({
+            searchRecipeInput: searchParams.get("query"),
+            filters,
+            offset: recipesList.length,
+          }),
+        }
+      );
 
-    console.log("searching for recipe...");
+      // const { message, code, data } = await res.json();
+      res.json().then(({ message, code, data }) => {
+        setLoading(false);
+        setRecipesList((prev: RecipeOverview[]) => [
+          ...prev,
+          ...JSON.parse(data),
+        ]);
+      });
+    };
+
+    if (searchParams.get("query")) {
+      setLoading(true);
+      fetchRecipes();
+    }
+  }, []);
+
+  const handleRecipeSearch = async (formData: FormValues) => {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_APP_URL}/api/get-recipes`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          ...formData,
+          filters,
+          offset: recipesList.length,
+        }),
+      }
+    );
+
+    const { message, code, data } = await res.json();
+    setRecipesList(JSON.parse(data));
+    router.push(`/search-recipe?query=${formData.searchRecipeInput}`);
   };
-
   return (
     <>
       <AnimatePresence initial={false} mode="wait">
@@ -32,19 +103,20 @@ const RecipeSearchForm = () => {
           />
         )}
       </AnimatePresence>
-
       <form
         id="recipe-search-form"
-        onSubmit={handleRecipeSearch}
+        onSubmit={handleSubmit(handleRecipeSearch)}
         className="flex flex-col items-center justify-center gap-5 "
+        autoComplete="off"
       >
         <div className="w-full flex items-center justify-center gap-5 ">
           <input
             id="search-recipe-input"
             type="text"
-            placeholder="recipe"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="search recipes..."
+            {...register("searchRecipeInput", {
+              required: "recipe search is required",
+            })}
             className="w-full md:w-1/2"
           />
 
@@ -52,7 +124,6 @@ const RecipeSearchForm = () => {
             type="button"
             className="relative button"
             onClick={() => setShow(!show)}
-            disabled={searchInput ? false : true}
           >
             {filters.length > 0 && (
               <span className="absolute -top-2 -right-3 bg-light w-6 h-6 rounded-3xl grid place-content-center shadow-m animate-bounce">
@@ -62,7 +133,11 @@ const RecipeSearchForm = () => {
             <p className="text-button">filters</p>
           </button>
           {filters.length > 0 && (
-            <button onClick={() => setFilters([])} className="button">
+            <button
+              type="button"
+              onClick={() => setFilters([])}
+              className="button"
+            >
               <GrPowerReset className="icon" />
             </button>
           )}

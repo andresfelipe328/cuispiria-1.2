@@ -7,7 +7,7 @@ import BasicAnimLayout from "@/components/layouts/BasicAnimLayout";
 
 export const metadata: Metadata = {
   title: "Cuispiria - Home",
-  description: "Recepies & Recepie Management App",
+  description: "Recipes & Recepie Management App",
 };
 
 export default async function Home() {

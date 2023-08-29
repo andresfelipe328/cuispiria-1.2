@@ -23,22 +23,29 @@ const RecipeSearchFilters = ({ show, setShow, filters, setFilters }: Props) => {
     title: string,
     group: string
   ) => {
-    const isGroupFilled = filters.find((filter) => filter.group === group);
+    // const isGroupFilled = filters.find((filter) => filter.group === group);
 
-    if (isGroupFilled) {
-      const isSameTitle = isGroupFilled.title === title;
-      if (isSameTitle) {
-        setFilters(filters.filter((filter) => isGroupFilled !== filter));
-      } else e.target.checked = false;
-    } else {
-      setFilters([
-        ...filters,
-        {
-          group,
-          title,
-        },
-      ]);
-    }
+    // if (isGroupFilled) {
+    //   const isSameTitle = isGroupFilled.title === title;
+    //   if (isSameTitle) {
+    //     setFilters(filters.filter((filter) => isGroupFilled !== filter));
+    //   } else e.target.checked = false;
+    // } else {
+    //   setFilters([
+    //     ...filters,
+    //     {
+    //       group,
+    //       title,
+    //     },
+    //   ]);
+    // }
+    setFilters([
+      ...filters,
+      {
+        group,
+        title,
+      },
+    ]);
   };
 
   const handleAddSort = (
@@ -187,7 +194,7 @@ const RecipeSearchFilters = ({ show, setShow, filters, setFilters }: Props) => {
                       name={`input-${sort.text}`}
                       id={`input-${sort.text}`}
                       className="hidden peer"
-                      onChange={(e) => handleAddSort(e, sort.text, "SORT")}
+                      onChange={(e) => handleAddFilter(e, sort.text, "SORT")}
                       checked={handleIsChecked(sort.text, "SORT")}
                     />
                     <div className="group filter-checkbox">

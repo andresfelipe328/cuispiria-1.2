@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { nanoid } from "nanoid";
 import { CustomRecipe } from "@/utils/types";
 import { handleWeekView } from "@/utils/calendarHelper";
+import { refreshPage } from "@/app/actions";
 
 import { FaTrash, FaCopy, FaPaste } from "react-icons/fa";
 
@@ -116,6 +117,7 @@ const WeekView = ({
         ...rest,
       },
     ]);
+    refreshPage();
     setCopyMeal(undefined);
   };
 

@@ -1,5 +1,6 @@
 "use client"; // Error components must be Client Components
 
+import BasicAnimLayout from "@/components/layouts/BasicAnimLayout";
 import { useEffect } from "react";
 
 const Error = ({ error, reset }: { error: Error; reset: () => void }) => {
@@ -9,17 +10,20 @@ const Error = ({ error, reset }: { error: Error; reset: () => void }) => {
   }, [error]);
 
   return (
-    <div>
-      <h2>Something went wrong!</h2>
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </button>
-    </div>
+    <BasicAnimLayout>
+      <div className="max-w-7xl mx-auto w-full flex flex-col gap-4 p-4">
+        <h2>Something went wrong!</h2>
+        <button
+          className="button w-fit mx-auto"
+          onClick={
+            // Attempt to recover by trying to re-render the segment
+            () => reset()
+          }
+        >
+          <p className="text-button">Try again</p>
+        </button>
+      </div>
+    </BasicAnimLayout>
   );
 };
 

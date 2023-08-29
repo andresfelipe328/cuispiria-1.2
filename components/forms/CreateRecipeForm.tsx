@@ -12,6 +12,7 @@ import {
   Instruction,
   Slot,
 } from "@/utils/types";
+import { refreshPage } from "@/app/actions";
 
 import { FaTrash } from "react-icons/fa";
 
@@ -101,6 +102,7 @@ const CreateRecipeForm = ({
           customed: true,
           readyInMinutes: Number(readyInMinutes),
           recipeTypes: recipeTypes.split(","),
+          saved: false,
           ...rest,
         }),
       }
@@ -119,6 +121,7 @@ const CreateRecipeForm = ({
           customed: true,
           readyInMinutes: Number(readyInMinutes),
           recipeTypes: recipeTypes.split(","),
+          saved: false,
           ...rest,
         };
         setMeals(meals);
@@ -133,10 +136,12 @@ const CreateRecipeForm = ({
             customed: true,
             readyInMinutes: Number(readyInMinutes),
             recipeTypes: recipeTypes.split(","),
+            saved: false,
             ...rest,
           },
         ]);
       }
+      refreshPage();
       setShow(!show);
     }
   };

@@ -25,6 +25,9 @@ const config: Config = {
       screens: {
         animm: "700px",
       },
+      backgroundImage: {
+        "recipe-bg": "url('/background.svg')",
+      },
     },
   },
   plugins: [],

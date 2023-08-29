@@ -19,18 +19,20 @@ export type Instruction = {
 };
 
 export type RecipeOverview = {
-  userId: string;
-  recipeId: string | number;
+  userId?: string;
+  id?: number;
+  recipeId: string;
   title: string;
-  readyInMinutes: number;
-  recipeType: string[];
+  readyInMinutes?: number;
+  recipeType?: string[];
   image?: string;
   date?: string;
   timeSlot?: number;
   pricePerServing?: number;
-  metaScore?: number;
+  aggregateLikes?: number;
   healthScore?: number;
-  customed: boolean;
+  customed?: boolean;
+  saved?: boolean;
 };
 
 export type CustomRecipe = {
@@ -47,6 +49,7 @@ export type CustomRecipe = {
   recipeIngredient: Ingredient[];
   recipeInstruction: Instruction[];
   customed: boolean;
+  saved: boolean;
 };
 
 export type FormValues = {

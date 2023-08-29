@@ -13,18 +13,6 @@ type Props = {
 const TodayMeals = async ({ allRecipes }: Props) => {
   // Variables
   const todayDate = new Date();
-  // const session = await getServerSession(authOptions);
-  // const res = await fetch(`${process.env.APP_URL}/api/get-meal-planning-data`, {
-  //   next: { tags: ["mealPlanningData"] },
-  //   method: "POST",
-  //   headers: {
-  //     "Content-type": "application/json",
-  //   },
-  //   body: JSON.stringify({
-  //     session,
-  //   }),
-  // });
-  // const { message, code, data } = await res.json();
 
   const todayMeals: Recipe[] = JSON.parse(allRecipes).filter(
     (recipe: Recipe) =>

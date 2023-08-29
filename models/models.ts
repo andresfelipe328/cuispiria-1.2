@@ -23,6 +23,7 @@ const customRecipeSchema = new mongoose.Schema({
     },
   ],
   customed: Boolean,
+  saved: Boolean,
 });
 
 const savedRecipeSchema = new mongoose.Schema({
