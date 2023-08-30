@@ -38,7 +38,7 @@ const MonthView = ({ selectedDate, meals }: Props) => {
             id="meal-calendar-month-view-cell"
             key={date.toISOString()}
             className={`day ${
-              date.toDateString() === todayDate.toDateString()
+              date.getDate() === todayDate.getDate()
                 ? "bg-extra [&>*:nth-child(1)]:text-medium"
                 : "bg-light"
             } border-2 border-dark/70 hover:bg-extra/80 transition-ease`}
