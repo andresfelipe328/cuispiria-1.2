@@ -96,7 +96,7 @@ const DropMenu = ({ show, setShow }: Props) => {
           id="drop-down-auth-controller"
           className="absolute bottom-10 right-5 flex items-center gap-2"
         >
-          {session ? <SignedUser /> : <NotSignedUser />}
+          {session.data ? <SignedUser /> : <NotSignedUser />}
         </div>
       </CollapseAnimLayout>
     </Backdrop>

@@ -13,11 +13,6 @@ const MonthView = ({ selectedDate, meals }: Props) => {
   const todayDate = new Date(new Date().toLocaleDateString());
   const daysInMonthView = handleMonthView(selectedDate);
 
-  console.log(
-    todayDate.toLocaleDateString("en-CA"),
-    daysInMonthView[30].toLocaleDateString("en-CA")
-  );
-
   const isThereMeal = (date: Date) => {
     const dayMeals = meals.filter(
       (meal) => new Date(meal.date).toDateString() === date.toDateString()
