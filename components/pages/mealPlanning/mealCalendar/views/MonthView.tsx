@@ -26,7 +26,6 @@ const MonthView = ({ selectedDate, meals }: Props) => {
       ));
     else return null;
   };
-  console.log(todayDate);
   return (
     <div
       id="meal-calendar-month-view-container"

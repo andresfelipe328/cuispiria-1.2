@@ -17,7 +17,7 @@ const TodayMeals = async ({ allRecipes }: Props) => {
       new Date(recipe.date!).toLocaleDateString("en-CA") ===
       todayDate.toLocaleDateString("en-CA")
   );
-  console.log(todayMeals);
+  console.log(todayDate, todayMeals);
 
   return (
     <div>
