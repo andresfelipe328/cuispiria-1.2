@@ -1,7 +1,5 @@
 import React from "react";
 
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import { RecipeOverview as Recipe } from "@/utils/types";
 
 import RecipeOverview from "../../helpers/RecipeOverview";
@@ -19,6 +17,7 @@ const TodayMeals = async ({ allRecipes }: Props) => {
       new Date(recipe.date!).toLocaleDateString("en-CA") ===
       todayDate.toLocaleDateString("en-CA")
   );
+  console.log(todayMeals);
 
   return (
     <div>
