@@ -8,6 +8,7 @@ import { BsFillHeartPulseFill } from "react-icons/bs";
 import { BiTimeFive, BiLinkAlt } from "react-icons/bi";
 import { FaInfoCircle } from "react-icons/fa";
 import { TbPointFilled } from "react-icons/tb";
+import SaveButton from "@/components/pages/recipe/SaveButton";
 
 export const metadata: Metadata = {
   title: "Cuispiria - Recipe Title",
@@ -65,8 +66,9 @@ const page = async ({ params: { id } }: Params) => {
             target="_blank"
             className="absolute right-2 button "
           >
-            <BiLinkAlt className="text-button" />
+            <BiLinkAlt className="icon" />
           </Link>
+          <SaveButton />
         </div>
 
         <div id="recipe-info-container" className="flex flex-col gap-2">

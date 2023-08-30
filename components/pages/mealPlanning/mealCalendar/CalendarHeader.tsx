@@ -118,7 +118,7 @@ const CalendarHeader = ({
         <div className="relative group">
           <input
             type="date"
-            value={selectedDate.toISOString().slice(0, 10)}
+            value={selectedDate.toLocaleDateString("en-CA")}
             onChange={handleDateChange}
             className="font-title group-hover:bg-extra group-hover:text-medium transition-ease"
           />

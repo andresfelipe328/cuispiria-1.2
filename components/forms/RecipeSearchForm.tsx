@@ -91,6 +91,7 @@ const RecipeSearchForm = ({
     setRecipesList(JSON.parse(data));
     router.push(`/search-recipe?query=${formData.searchRecipeInput}`);
   };
+
   return (
     <>
       <AnimatePresence initial={false} mode="wait">

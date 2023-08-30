@@ -25,7 +25,10 @@ const Burger = () => {
         id="burger-button"
         className="scale-100 md:scale-0 absolute h-[102px] flex items-center top-0 right-5 z-50 transition-ease"
       >
-        <button onClick={() => setShow(!show)} className="group">
+        <button
+          onClick={() => setShow(!show)}
+          className="group p-2 bg-medium rounded-md shadow-s"
+        >
           <BiMenuAltRight className="icon" />
         </button>
       </div>
