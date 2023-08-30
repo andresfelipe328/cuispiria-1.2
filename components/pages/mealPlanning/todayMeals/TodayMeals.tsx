@@ -16,7 +16,8 @@ const TodayMeals = async ({ allRecipes }: Props) => {
 
   const todayMeals: Recipe[] = JSON.parse(allRecipes).filter(
     (recipe: Recipe) =>
-      new Date(recipe.date!).toDateString() === todayDate.toDateString()
+      new Date(recipe.date!).toLocaleDateString("en-CA") ===
+      todayDate.toLocaleDateString("en-CA")
   );
 
   return (
