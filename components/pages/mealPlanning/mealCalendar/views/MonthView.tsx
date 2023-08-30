@@ -26,7 +26,7 @@ const MonthView = ({ selectedDate, meals }: Props) => {
       ));
     else return null;
   };
-
+  console.log(todayDate.toLocaleDateString("en-CA"));
   return (
     <div
       id="meal-calendar-month-view-container"
@@ -38,7 +38,8 @@ const MonthView = ({ selectedDate, meals }: Props) => {
             id="meal-calendar-month-view-cell"
             key={date.toISOString()}
             className={`day ${
-              date.getDate() === todayDate.getDate()
+              date.toLocaleDateString("en-CA") ===
+              todayDate.toLocaleDateString("en-CA")
                 ? "bg-extra [&>*:nth-child(1)]:text-medium"
                 : "bg-light"
             } border-2 border-dark/70 hover:bg-extra/80 transition-ease`}
