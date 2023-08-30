@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 
 import { RecipeOverview as Recipe } from "@/utils/types";
@@ -8,7 +10,7 @@ type Props = {
   allRecipes: string;
 };
 
-const TodayMeals = async ({ allRecipes }: Props) => {
+const TodayMeals = ({ allRecipes }: Props) => {
   // Variables
   const todayDate = new Date(new Date().toLocaleDateString());
 
@@ -17,7 +19,7 @@ const TodayMeals = async ({ allRecipes }: Props) => {
       new Date(recipe.date!).toLocaleDateString("en-CA") ===
       todayDate.toLocaleDateString("en-CA")
   );
-  console.log(todayDate, todayMeals);
+  console.log(todayDate, new Date(), todayMeals);
 
   return (
     <div>
