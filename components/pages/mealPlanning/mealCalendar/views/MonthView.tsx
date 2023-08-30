@@ -10,7 +10,7 @@ type Props = {
 
 const MonthView = ({ selectedDate, meals }: Props) => {
   // Variables
-  const todayDate = new Date();
+  const todayDate = new Date(new Date().toLocaleDateString());
   const daysInMonthView = handleMonthView(selectedDate);
 
   const isThereMeal = (date: Date) => {
@@ -26,7 +26,7 @@ const MonthView = ({ selectedDate, meals }: Props) => {
       ));
     else return null;
   };
-  console.log(todayDate.toLocaleDateString("en-CA"));
+  console.log(todayDate);
   return (
     <div
       id="meal-calendar-month-view-container"

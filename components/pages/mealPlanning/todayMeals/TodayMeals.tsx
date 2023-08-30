@@ -10,7 +10,7 @@ type Props = {
 
 const TodayMeals = async ({ allRecipes }: Props) => {
   // Variables
-  const todayDate = new Date();
+  const todayDate = new Date(new Date().toLocaleDateString());
 
   const todayMeals: Recipe[] = JSON.parse(allRecipes).filter(
     (recipe: Recipe) =>
