@@ -4,7 +4,7 @@ import { FaHeart } from "react-icons/fa";
 
 const SaveButton = () => {
   return (
-    <button type="button" className="absolute right-2 top-14 button ">
+    <button type="button" className="button">
       <FaHeart className="icon" />
     </button>
   );

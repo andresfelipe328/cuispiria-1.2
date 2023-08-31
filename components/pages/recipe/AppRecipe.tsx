@@ -1,30 +1,18 @@
+import React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Metadata } from "next";
 
-import { AiFillLike } from "react-icons/ai";
-import { BsFillHeartPulseFill } from "react-icons/bs";
-import { BiTimeFive, BiLinkAlt } from "react-icons/bi";
-import { FaInfoCircle } from "react-icons/fa";
 import { TbPointFilled } from "react-icons/tb";
+import { BiLinkAlt, BiTimeFive } from "react-icons/bi";
+import { BsFillHeartPulseFill } from "react-icons/bs";
+import { AiFillLike } from "react-icons/ai";
+import { FaInfoCircle } from "react-icons/fa";
 
 import BasicAnimLayout from "@/components/layouts/BasicAnimLayout";
-import SaveButton from "@/components/pages/recipe/SaveButton";
-import CaloricBreakdown from "@/components/pages/recipe/CaloricBreakdown";
-import NutrientBreakdown from "@/components/pages/recipe/NutrientBreakdown";
+import SaveButton from "./SaveButton";
 
-export const metadata: Metadata = {
-  title: "Cuispiria - Recipe Title",
-  description: "Recipe Title",
-};
-
-type Params = {
-  params: {
-    id: string;
-  };
-  searchParams: {
-    custom: string;
-  };
+type Props = {
+  id: string;
 };
 
 const getRecipe = async (id: string) => {
@@ -42,9 +30,8 @@ const getRecipe = async (id: string) => {
   return JSON.parse(data);
 };
 
-const page = async ({ params: { id }, searchParams: { custom } }: Params) => {
+const AppRecipe = async ({ id }: Props) => {
   const recipe = await getRecipe(id);
-
   return (
     <BasicAnimLayout>
       <div className="max-w-7xl mx-auto w-full flex-1 flex flex-col gap-5 p-4">
@@ -60,7 +47,7 @@ const page = async ({ params: { id }, searchParams: { custom } }: Params) => {
               alt={`${recipe.title} image recipe`}
               fill={true}
               sizes="100%"
-              className="object-contain border-image"
+              className="object-contain"
               priority
             />
           </div>
@@ -75,9 +62,7 @@ const page = async ({ params: { id }, searchParams: { custom } }: Params) => {
           >
             <BiLinkAlt className="icon" />
           </Link>
-          <div className="absolute right-2 top-14">
-            <SaveButton />
-          </div>
+          <SaveButton />
         </div>
 
         <div id="recipe-info-container" className="flex flex-col gap-2">
@@ -154,16 +139,9 @@ const page = async ({ params: { id }, searchParams: { custom } }: Params) => {
             )}
           </ul>
         </div>
-
-        <div id="recipe-nutrition-container" className="flex flex-col gap-4">
-          <h3>Nutrition</h3>
-
-          <CaloricBreakdown data={recipe.nutrition.caloricBreakdown} />
-          <NutrientBreakdown data={recipe.nutrition.nutrients} />
-        </div>
       </div>
     </BasicAnimLayout>
   );
 };
 
-export default page;
+export default AppRecipe;

@@ -18,7 +18,9 @@ type Props = {
 const RecipeOverview = ({ saved, recipe }: Props) => {
   return (
     <Link
-      href={`/recipe/${recipe.id}`}
+      href={`/${recipe.customed ? "custom-recipe" : "recipe"}/${
+        recipe.id || recipe.recipeId
+      }`}
       id="recipe-overview-container"
       className="group/container"
     >

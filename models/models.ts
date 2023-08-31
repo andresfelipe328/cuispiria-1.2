@@ -35,7 +35,7 @@ const savedRecipeSchema = new mongoose.Schema({
   image: String,
   pricePerServing: Number,
   customed: Boolean,
-  metaScore: Number,
+  aggregateLikes: Number,
   healthScore: Number,
 });
 

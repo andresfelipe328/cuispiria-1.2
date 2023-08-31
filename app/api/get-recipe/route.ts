@@ -2,7 +2,7 @@ import { NextResponse, NextRequest } from "next/server";
 
 const getRecipe = async (recipeId: string) => {
   const res = await fetch(
-    `https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${process.env.SPOONACULAR_API_KEY}`,
+    `https://api.spoonacular.com/recipes/${recipeId}/information?includeNutrition=true&apiKey=${process.env.SPOONACULAR_API_KEY}`,
     {
       cache: "force-cache",
       method: "GET",
