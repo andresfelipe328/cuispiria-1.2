@@ -12,6 +12,8 @@ import { FaImage } from "react-icons/fa";
 
 import BasicAnimLayout from "@/components/layouts/BasicAnimLayout";
 import SaveButton from "@/components/pages/recipe/SaveButton";
+import CaloricBreakdown from "@/components/pages/recipe/CaloricBreakdown";
+import NutrientBreakdown from "@/components/pages/recipe/NutrientBreakdown";
 
 export const metadata: Metadata = {
   title: "Cuispiria - Recipe Title",
@@ -22,15 +24,31 @@ type Params = {
   params: {
     id: string;
   };
-  searchParams: {
-    custom: string;
-  };
 };
 
-const page = async ({ params: { id }, searchParams: { custom } }: Params) => {
+const getNutrition = async (recipe: CustomRecipe) => {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_APP_URL}/api/get-custom-recipe-nutrition`,
+    {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        recipe: recipe,
+      }),
+    }
+  );
+
+  const { message, code, data } = await res.json();
+  return JSON.parse(data);
+};
+
+const page = async ({ params: { id } }: Params) => {
   // Variables
   const session = await getServerSession(authOptions);
   const recipe: CustomRecipe = await getRecipe(id, session);
+  const nutritionData = await getNutrition(recipe);
 
   return (
     <BasicAnimLayout>
@@ -102,6 +120,13 @@ const page = async ({ params: { id }, searchParams: { custom } }: Params) => {
               </li>
             ))}
           </ul>
+        </div>
+
+        <div id="recipe-nutrition-container" className="flex flex-col gap-4">
+          <h3>Nutrition</h3>
+
+          <CaloricBreakdown data={nutritionData.nutrition.caloricBreakdown} />
+          <NutrientBreakdown data={nutritionData.nutrition.nutrients} />
         </div>
       </div>
     </BasicAnimLayout>
