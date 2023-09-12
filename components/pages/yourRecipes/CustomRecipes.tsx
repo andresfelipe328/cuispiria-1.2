@@ -19,7 +19,7 @@ const CustomRecipes = ({ allRecipes }: Props) => {
       >
         {savedRecipes.length > 0 ? (
           savedRecipes.map((meal) => (
-            <RecipeOverview key={meal.recipeId} recipe={meal} saved={true} />
+            <RecipeOverview key={meal.recipeId} recipe={meal} />
           ))
         ) : (
           <small>no saved custom meals</small>

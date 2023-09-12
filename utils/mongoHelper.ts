@@ -1,6 +1,10 @@
 import dbConnect from "@/config/connectMongoDB";
 import { CustomRecipe, SavedRecipe } from "@/models/models";
-import { CustomRecipe as CRecipe, RecipeOverview as Recipe } from "./types";
+import {
+  CustomRecipe as CRecipe,
+  RecipeOverview as Recipe,
+  SavedRecipe as SRecipe,
+} from "./types";
 import { Document } from "mongodb";
 
 const getAllRecipes = async (session: any) => {
@@ -20,7 +24,7 @@ const getAllRecipes = async (session: any) => {
 
 const getAllSavedRecipes = async (session: any) => {
   await dbConnect();
-  let recipes: Recipe[] = [];
+  let recipes: SRecipe[] = [];
 
   try {
     if (session)

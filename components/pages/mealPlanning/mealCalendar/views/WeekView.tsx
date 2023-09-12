@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useSession } from "next-auth/react";
 
@@ -9,6 +11,7 @@ import { handleWeekView } from "@/utils/calendarHelper";
 import { refreshPage } from "@/app/actions";
 
 import { FaTrash, FaCopy, FaPaste } from "react-icons/fa";
+import { AiFillEye } from "react-icons/ai";
 
 type Props = {
   meals: CustomRecipe[];
@@ -26,6 +29,7 @@ const WeekView = ({
   setShowModal,
 }: Props) => {
   // Variables
+  const router = useRouter();
   const todayDate = new Date();
   const daysInWeek = handleWeekView(selectedDate);
   const hours = Array.from({ length: 25 }, (_, i) => i);
@@ -40,6 +44,11 @@ const WeekView = ({
     );
 
     return meal;
+  };
+
+  const handleViewRecipe = (e: React.SyntheticEvent, meal: CustomRecipe) => {
+    e.stopPropagation();
+    router.push(`/custom-recipe/${meal.recipeId}`);
   };
 
   const handleCellClick = (dayIndex: number, timeSlotIndex: number) => {
@@ -133,7 +142,6 @@ const WeekView = ({
           <span className="point md:opacity-0 group-hover:-translate-y-4 transition-ease"></span>
           <div className="flex justify-around w-full">
             <button
-              data-tooltip-id="delete-recipe-button"
               type="button"
               onClick={(e) => handleDelete(e, meal)}
               className=" top-2 left-2 opacity-0 group-hover:opacity-100 transition-all duration-200 ease-in-out"
@@ -142,7 +150,14 @@ const WeekView = ({
             </button>
 
             <button
-              data-tooltip-id="copy-recipe-button"
+              onClick={(e) => handleViewRecipe(e, meal)}
+              // href={`/custom-recipe/${meal.recipeId}`}
+              className=" top-2 left-2 opacity-0 group-hover:opacity-100 transition-all duration-200 ease-in-out"
+            >
+              <AiFillEye className="text-dark" />
+            </button>
+
+            <button
               type="button"
               onClick={(e) => handleCopy(e, meal)}
               className=" bottom-2 right-2 opacity-0 group-hover:opacity-100 transition-all duration-200 ease-in-out"

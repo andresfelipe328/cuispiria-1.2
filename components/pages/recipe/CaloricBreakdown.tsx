@@ -66,7 +66,7 @@ const CaloricBreakdown = ({ data }: Props) => {
   };
 
   return (
-    <div className="h-[200px] w-full flex items-center justify-center drop-shadow-md">
+    <div className="h-[200px] w-full flex items-center justify-center drop-shadow-md overflow-x-hidden">
       <Pie data={PieData} options={options} />
     </div>
   );

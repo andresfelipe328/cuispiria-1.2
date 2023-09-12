@@ -28,7 +28,7 @@ const TodayMeals = ({ allRecipes }: Props) => {
       <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {todayMeals.length > 0 ? (
           todayMeals.map((meal) => (
-            <RecipeOverview key={meal.recipeId} recipe={meal} saved={false} />
+            <RecipeOverview key={meal.recipeId} recipe={meal} />
           ))
         ) : (
           <small>no meals today</small>

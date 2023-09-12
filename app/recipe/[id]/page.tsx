@@ -76,7 +76,7 @@ const page = async ({ params: { id }, searchParams: { custom } }: Params) => {
             <BiLinkAlt className="icon" />
           </Link>
           <div className="absolute right-2 top-14">
-            <SaveButton />
+            <SaveButton recipe={JSON.stringify(recipe)} />
           </div>
         </div>
 
@@ -155,12 +155,18 @@ const page = async ({ params: { id }, searchParams: { custom } }: Params) => {
           </ul>
         </div>
 
-        <div id="recipe-nutrition-container" className="flex flex-col gap-4">
-          <h3>Nutrition</h3>
+        {recipe.nutrition && (
+          <div id="recipe-nutrition-container" className="flex flex-col gap-4">
+            <h3>Nutrition</h3>
 
-          <CaloricBreakdown data={recipe.nutrition.caloricBreakdown} />
-          <NutrientBreakdown data={recipe.nutrition.nutrients} />
-        </div>
+            {recipe.nutrition?.caloricBreakdown && (
+              <CaloricBreakdown data={recipe.nutrition.caloricBreakdown} />
+            )}
+            {recipe.nutrition?.nutrients && (
+              <NutrientBreakdown data={recipe.nutrition.nutrients} />
+            )}
+          </div>
+        )}
       </div>
     </BasicAnimLayout>
   );

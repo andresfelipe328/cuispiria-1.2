@@ -38,7 +38,7 @@ export type RecipeOverview = {
 export type CustomRecipe = {
   _id?: string;
   userId: string;
-  recipeId: string | number;
+  recipeId: string;
   title: string;
   readyInMinutes: number;
   recipeTypes: string[];
@@ -50,6 +50,17 @@ export type CustomRecipe = {
   recipeInstruction: Instruction[];
   customed: boolean;
   saved: boolean;
+};
+
+export type SavedRecipe = {
+  userId: string;
+  recipeId: string;
+  title: string;
+  readyInMinutes: number;
+  image: string;
+  customed?: boolean;
+  aggregateLikes: number;
+  healthScore: number;
 };
 
 export type FormValues = {

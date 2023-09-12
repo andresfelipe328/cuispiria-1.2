@@ -3,12 +3,15 @@ import React from "react";
 import { handleMonthView } from "@/utils/calendarHelper";
 import { CustomRecipe } from "@/utils/types";
 
+import { AiFillEye } from "react-icons/ai";
+
 type Props = {
   selectedDate: Date;
+  setSelectedDate: Function;
   meals: CustomRecipe[];
 };
 
-const MonthView = ({ selectedDate, meals }: Props) => {
+const MonthView = ({ selectedDate, setSelectedDate, meals }: Props) => {
   // Variables
   const todayDate = new Date(new Date().toLocaleDateString());
   const daysInMonthView = handleMonthView(selectedDate);
@@ -26,6 +29,11 @@ const MonthView = ({ selectedDate, meals }: Props) => {
       ));
     else return null;
   };
+
+  const renderViewIndicator = () => {
+    return <AiFillEye className="text-dark absolute top-1 right-1" />;
+  };
+
   return (
     <div
       id="meal-calendar-month-view-container"
@@ -36,7 +44,8 @@ const MonthView = ({ selectedDate, meals }: Props) => {
           <div
             id="meal-calendar-month-view-cell"
             key={date.toISOString()}
-            className={`day ${
+            onClick={() => setSelectedDate(date)}
+            className={`relative day ${
               date.toLocaleDateString("en-CA") ===
               todayDate.toLocaleDateString("en-CA")
                 ? "bg-extra [&>*:nth-child(1)]:text-medium"
@@ -48,11 +57,15 @@ const MonthView = ({ selectedDate, meals }: Props) => {
             <div className="flex justify-center flex-wrap gap-1">
               {isThereMeal(date)}
             </div>
+
+            {date.toLocaleDateString("en-CA") ===
+              selectedDate.toLocaleDateString("en-CA") && renderViewIndicator()}
           </div>
         ) : (
           <div
             id="meal-calendar-neighbor-month-view-cell"
             key={date.toISOString()}
+            onClick={() => setSelectedDate(date)}
             className="day bg-light border-2 border-dark/70 opacity-70 hover:bg-extra/80 transition-ease"
           >
             <p className="text-main text-lg text-center">{date.getDate()}</p>
@@ -60,6 +73,9 @@ const MonthView = ({ selectedDate, meals }: Props) => {
             <div className="flex justify-center flex-wrap gap-1">
               {isThereMeal(date)}
             </div>
+
+            {date.toLocaleDateString("en-CA") ===
+              selectedDate.toLocaleDateString("en-CA") && renderViewIndicator()}
           </div>
         )
       )}

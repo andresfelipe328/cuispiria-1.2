@@ -76,7 +76,7 @@ const page = async ({ params: { id } }: Params) => {
             )}
           </div>
           <div className="absolute right-2 top-2">
-            <SaveButton />
+            <SaveButton recipe={JSON.stringify(recipe)} />
           </div>
         </div>
 

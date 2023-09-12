@@ -7,15 +7,14 @@ import { RecipeOverview as Recipe } from "@/utils/types";
 import { AiFillLike } from "react-icons/ai";
 import { BiTimeFive } from "react-icons/bi";
 import { MdAttachMoney } from "react-icons/md";
-import { FaHeart, FaImage } from "react-icons/fa";
+import { FaImage } from "react-icons/fa";
 import { BsFillHeartPulseFill } from "react-icons/bs";
 
 type Props = {
-  saved: boolean;
   recipe: Recipe;
 };
 
-const RecipeOverview = ({ saved, recipe }: Props) => {
+const RecipeOverview = ({ recipe }: Props) => {
   return (
     <Link
       href={`/${recipe.customed ? "custom-recipe" : "recipe"}/${

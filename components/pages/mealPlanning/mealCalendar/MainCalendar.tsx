@@ -3,13 +3,14 @@
 import React, { useState } from "react";
 
 import { AnimatePresence } from "framer-motion";
-import { CustomRecipe, Slot } from "@/utils/types";
+import { CustomRecipe, RecipeOverview as Recipe, Slot } from "@/utils/types";
 
 import CreateMealModal from "./CreateMealModal";
 import CalendarHeader from "./CalendarHeader";
 import MonthView from "./views/MonthView";
 import WeekView from "./views/WeekView";
 import DayView from "./views/DayView";
+import DateMealsList from "./DateMealsList";
 
 type Props = {
   allRecipes: string;
@@ -17,6 +18,7 @@ type Props = {
 
 const MainCalendar = ({ allRecipes }: Props) => {
   // Variables
+  const todayDate = new Date(new Date().toLocaleDateString());
   const [meals, setMeals] = useState<CustomRecipe[]>(JSON.parse(allRecipes));
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [viewType, setViewType] = useState("month");
@@ -30,7 +32,11 @@ const MainCalendar = ({ allRecipes }: Props) => {
         className="calendar-view mt-1 flex-1"
       >
         {viewType === "month" && (
-          <MonthView selectedDate={selectedDate} meals={meals} />
+          <MonthView
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+            meals={meals}
+          />
         )}
         {viewType === "week" && (
           <WeekView
@@ -80,6 +86,11 @@ const MainCalendar = ({ allRecipes }: Props) => {
         />
         {renderCalendarView()}
       </div>
+
+      {todayDate.toLocaleDateString("en-CA") !==
+        selectedDate.toLocaleDateString("en-CA") && (
+        <DateMealsList selectedDate={selectedDate} meals={allRecipes} />
+      )}
     </>
   );
 };

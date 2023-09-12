@@ -51,7 +51,7 @@ const Recipes = () => {
           <>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {recipesList.map((recipe, index) => (
-                <RecipeOverview key={index} recipe={recipe} saved={false} />
+                <RecipeOverview key={index} recipe={recipe} />
               ))}
             </div>
 
